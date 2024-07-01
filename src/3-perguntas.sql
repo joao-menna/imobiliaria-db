@@ -79,3 +79,48 @@ SELECT
 FROM imovel_sala_comercial s
 JOIN imovel i ON s.imovel_id = i.id
 WHERE s.quantidade_banheiro < 3;
+
+
+-- 10. Torna um imóvel específico indisponível.
+UPDATE imovel
+SET disponivel = FALSE
+WHERE id = 10;
+
+
+-- 11. Adiciona um contato de emergência.
+ALTER TABLE cliente
+ADD COLUMN contato_emergencia INT;
+
+
+-- 12. Modifica o input (tipo de dados) da coluna "contato_emergencia".
+ALTER TABLE cliente
+MODIFY COLUMN contato_emergencia varchar(50);
+
+
+-- 13. Modifica o nome da coluna "contato_emergencia".
+ALTER TABLE cliente
+RENAME COLUMN contato_emergencia TO contato_secundario;
+
+
+-- 14. Apaga o atributo "estado_civil".
+ALTER TABLE cliente DROP CLOUMN contato_secundario;
+
+
+-- 15. cria uma view para listar imoveis disponiveis.
+CREATE VIEW view_imoveis_disponiveis AS
+  SELECT
+    i.id AS imovel_id,
+    i.estado,
+    i.cidade,
+    i.bairro,
+    i.rua,
+    i.numero,
+    i.data_construcao,
+    i.modalidade,
+    i.valor,
+    c.nome AS nome_cliente,
+    c.telefone AS telefone_cliente,
+    c.email AS email_cliente
+  FROM imovel i
+  INNER JOIN cliente c ON i.cliente_usuario_id = c.id
+  WHERE i.disponivel = TRUE;
