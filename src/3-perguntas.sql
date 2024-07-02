@@ -1,5 +1,5 @@
 -- 1. Quantos clientes estão registrados.
-SELECT COUNT() AS total_clientes FROM cliente;
+SELECT COUNT(*) AS total_clientes FROM cliente;
 
 
 -- 2. Soma o total de comissões recebidas por cada funcionário,
@@ -15,7 +15,7 @@ GROUP BY f.nome;
 -- 3. Conta quantos imóveis estão disponíveis para locação em cada estado.
 SELECT 
   estado,
-  COUNT() AS imoveis_disponiveis
+  COUNT(*) AS imoveis_disponiveis
 FROM imovel
 WHERE modalidade = 'locacao' AND disponivel = TRUE
 GROUP BY estado;
